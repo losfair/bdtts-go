@@ -10,6 +10,10 @@ import "io/ioutil"
 var cached_output map[string]interface{}
 
 func Request(access_token,text string) ([]byte,error) {
+	if cached_output==nil {
+		cached_output=make(map[string]interface{})
+	}
+
 	cc,ok := cached_output[text]
 	if ok {
 		return cc.([]byte),nil
